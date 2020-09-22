@@ -1,8 +1,8 @@
 FROM ruby:2.7.1
 
-ENV LANG=ja_JP.UTF-8 \
+ENV LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
-    ROOT=/app
+    ROOT=/myapp
 
 RUN apt-get update -qq && apt-get install -y postgresql-client
 
@@ -10,13 +10,11 @@ WORKDIR $ROOT
 
 RUN gem install bundler
 
-WORKDIR /app
-
 COPY Gemfile $ROOT
 COPY Gemfile.lock $ROOT
 
-RUN bundle install
+RUN bundle install -j4
 
 COPY . $ROOT
 
-CMD ["bin/rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
