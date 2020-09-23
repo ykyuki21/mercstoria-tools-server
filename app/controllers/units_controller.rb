@@ -1,5 +1,7 @@
 class UnitsController < ApplicationController
   def index
-    render json: { status: "ok" }
+    units = Unit.all
+    # TODO: Use serializer
+    render json: { units: units }
   end
 end

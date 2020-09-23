@@ -5,3 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+return if Rails.env.production?
+
+Unit.create!(
+  [
+    {
+      name: "シエット",
+      full_name: "【白光宿す旋槍】シエット",
+      rarity: 5,
+      element: 4,
+      weapon: 2,
+    },
+    {
+      name: "テオ",
+      full_name: "【灯の魔宝使い】テオ",
+      rarity: 2,
+      element: 1,
+      weapon: 5,
+    }
+  ]
+)
