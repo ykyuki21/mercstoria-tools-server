@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  full_name: MyString
+  rarity: 1
+  element: 1
+  weapon: 1
+
+two:
+  name: MyString
+  full_name: MyString
+  rarity: 1
+  element: 1
+  weapon: 1
