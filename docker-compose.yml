@@ -4,16 +4,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c "rm -f tmp/pids/server.pid && rails server -p 3000 -b '0.0.0.0'"
+    command: ["bundle", "exec", "puma", "-b", "unix:/app/sockets/puma.sock"]
     volumes:
-      - .:/myapp
+      - .:/app
+      - ./log:/app/log
       - bundle:/bundle
-      - public:/myapp/public
-      - log:/myapp/log
+      - public:/app/public
+      - sockets:/app/sockets
     ports:
       - "3000:3000"
     depends_on:
       - db
+      - nginx
   db:
     image: postgres
     volumes:
@@ -24,9 +26,20 @@ services:
       - POSTGRES_DB=db
       - POSTGRES_USER=merc
       - POSTGRES_PASSWORD=password
+  nginx:
+    image: nginx:1.18
+    ports:
+      - "80:80"
+    command: [nginx]
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - public:/app/public
+      - log:/var/log/nginx
+      - sockets:/app/sockets
 volumes:
   postgresql-volume:
     external: true
   bundle:
   public:
   log:
+  sockets:
