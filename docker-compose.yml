@@ -1,5 +1,15 @@
 version: "3"
-services: 
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgresql-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=app_development
   web:
     build:
       context: .
@@ -11,21 +21,9 @@ services:
       - bundle:/bundle
       - public:/app/public
       - sockets:/app/sockets
-    ports:
-      - "3000:3000"
     depends_on:
       - db
       - nginx
-  db:
-    image: postgres
-    volumes:
-      - postgresql-volume:/var/lib/postgresql/data
-    ports:
-      - "5432"
-    environment:
-      - POSTGRES_DB=db
-      - POSTGRES_USER=merc
-      - POSTGRES_PASSWORD=password
   nginx:
     image: nginx:1.18
     ports:
