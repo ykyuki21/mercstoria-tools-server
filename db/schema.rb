@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 2020_09_23_145500) do
     t.integer "rarity"
     t.integer "element"
     t.integer "weapon"
+    t.integer "life"
+    t.integer "attack"
+    t.integer "speed"
+    t.float "interval"
+    t.integer "reach"
+    t.integer "position"
+    t.integer "toughness"
+    t.string "growth"
+    t.integer "target"
+    t.integer "time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
