@@ -4,7 +4,9 @@ ENV LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     ROOT=/app
 
-RUN apt-get update -qq && apt-get install -y postgresql-client
+RUN apt-get update -qq && apt-get install -y \
+    postgresql-client \
+    git
 
 WORKDIR $ROOT
 
