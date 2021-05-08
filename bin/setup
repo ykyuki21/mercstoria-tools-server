@@ -9,6 +9,10 @@ def system!(*args)
 end
 
 FileUtils.chdir APP_ROOT do
+  puts "== Installing dependencies =="
+  system! "gem install bundler --conservative"
+  system("bundle check") || system!("bundle install --path vendor/bundle")
+
   puts "\n== Preparing database =="
   system! 'bin/rails db:prepare db:seed'
   puts "\n== Completed =="
